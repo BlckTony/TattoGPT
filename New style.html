@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>El Rincón del Radiólogo — Portfolio</title>
+
+  <!-- Optional: Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+  /* === Base / Reset === */
+  :root{
+    --bg:#0b0b0c;
+    --panel:#0f0f10;
+    --muted:#bdbdbd;
+    --accent:#e63946; /* subtle red */
+    --accent-2:#ffd166; /* warm yellow */
+    --glass: rgba(255,255,255,0.04);
+    --max-width:1100px;
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: linear-gradient(180deg,#080808 0%, #0f0f10 100%);
+    color:#eee;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.4;
+    padding:32px 20px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .container{
+    width:100%;
+    max-width:var(--max-width);
+  }
+
+  /* === Header / hero === */
+  header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:28px;
+  }
+
+  .logo {
+    flex:0 0 220px;
+    height:64px;
+    background: linear-gradient(180deg,#bfbfbf,#8f8f8f);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-weight:800;
+    letter-spacing:2px;
+    font-size:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .site-intro{
+    flex:1;
+    padding:14px 18px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:var(--radius);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.7);
+  }
+  .site-intro h1{margin:0 0 6px 0; font-size:20px; letter-spacing:1px}
+  .site-intro p{margin:0;color:var(--muted); font-size:14px}
+
+  .cta-row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+  }
+  .btn {
+    background: var(--accent);
+    border:none;
+    color:white;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    text-decoration:none;
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+  }
+  .btn.secondary{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted) }
+  .btn.ghost{ background:transparent; color:var(--accent-2); border:1px dashed rgba(255,209,102,0.06) }
+
+  /* === Two-column intro + gallery === */
+  .layout {
+    display:grid;
+    grid-template-columns: 320px 1fr;
+    gap:20px;
+    margin-bottom:28px;
+  }
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr; padding-bottom:10px}
+    header{flex-direction:column; align-items:stretch}
+    .logo{width:100%; height:64px}
+  }
+
+  /* Left column: About + invite */
+  .panel{
+    background:var(--panel);
+    border-radius:16px;
+    padding:18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .about h2{margin:0 0 8px 0; font-size:16px}
+  .about p{color:var(--muted); font-size:14px}
+  .socials{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap}
+  .socials a{color:var(--muted); font-size:13px; text-decoration:none; padding:8px 10px; background:var(--glass); border-radius:10px}
+
+  .artist-invite{
+    margin-top:16px;
+    padding:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.02);
+  }
+  .artist-invite h3{margin:0 0 8px 0; font-size:15px}
+  .artist-invite p{margin:0;color:var(--muted); font-size:13px}
+
+  /* Right column: Gallery */
+  .gallery-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  .gallery-header h2{margin:0; font-size:16px}
+  .filters{display:flex; gap:8px}
+  .filter{padding:8px 10px; background:transparent; border-radius:9px; border:1px solid rgba(255,255,255,0.03); font-size:13px; color:var(--muted)}
+
+  .gallery-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:12px;
+  }
+  @media (max-width:1000px){ .gallery-grid{grid-template-columns: repeat(2,1fr)} }
+  @media (max-width:600px){ .gallery-grid{grid-template-columns:1fr} }
+
+  figure.card{
+    margin:0;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.35));
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+  }
+  figure.card img{
+    display:block;
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transform-origin:center;
+    transition: transform .45s ease;
+  }
+  figure.card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.7) }
+  figure.card:hover img{ transform: scale(1.06) }
+
+  figure.card figcaption{
+    position:absolute;
+    left:12px;
+    bottom:12px;
+    right:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
+    font-size:13px;
+    backdrop-filter: blur(6px);
+  }
+  .tag{
+    background: rgba(0,0,0,0.5);
+    padding:6px 8px;
+    border-radius:8px;
+    font-weight:600;
+    color:var(--accent-2);
+    font-size:12px;
+  }
+
+  /* === CSS-only Lightbox using :target === */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    display:grid;
+    place-items:center;
+    background: rgba(0,0,0,0.88);
+    visibility:hidden;
+    opacity:0;
+    transition: opacity .25s ease, visibility .25s;
+    padding:30px;
+    z-index:99;
+  }
+  .lightbox:target{ visibility:visible; opacity:1 }
+  .lightbox .content{
+    width:100%;
+    max-width:1100px;
+    max-height:90vh;
+    display:flex;
+    gap:18px;
+    align-items:center;
+  }
+  .lightbox img{
+    max-height:90vh;
+    max-width:calc(100% - 240px);
+    object-fit:contain;
+    border-radius:10px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+  }
+  .lightbox .meta{
+    width:220px;
+    color:var(--muted);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:14px;
+    border-radius:12px;
+    align-self:flex-start;
+    font-size:14px;
+  }
+  .lightbox .meta h4{margin:0 0 8px 0; color:#fff}
+  .close{
+    display:inline-block;
+    margin-top:12px;
+    background:transparent;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:13px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.03);
+  }
+
+  /* Footer */
+  footer{
+    margin-top:18px;
+    color:var(--muted);
+    font-size:13px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">EL RINCÓN<br><small style="font-size:10px;opacity:0.7;">DEL RADIÓLOGO</small></div>
+
+      <div class="site-intro">
+        <h1>Portfolio • Custom Tattoo & Artwork</h1>
+        <p>Showcasing original tattoo designs, paintings and sketches. For bookings or collaborations: <strong>@tatoo206</strong> on Instagram.</p>
+
+        <div class="cta-row">
+          <a class="btn" href="https://www.instagram.com/tatoo206" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn secondary" href="mailto:el.radiologo@example.com">Book a Session</a>
+          <a class="btn ghost" href="#contact">Artists: Submit Work</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+
+      <!-- Left column: about + socials + invitation -->
+      <aside class="panel">
+        <section class="about">
+          <h2>About</h2>
+          <p>I'm a radiologist who found a deep passion for visual art and tattooing. This space collects sketches, canvases and tattoos inspired by anime, stories heard from patients, and daily life. I invite guest artists to show their work here.</p>
+
+          <div class="socials" aria-hidden="false">
+            <a href="https://www.instagram.com/tatoo206" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+            <a href="#gallery">Portfolio</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </section>
+
+        <div class="artist-invite" role="note">
+          <h3>Artists — showcase here</h3>
+          <p>Want to display a guest set in this gallery? Email a selection of work and a short bio to the address in the footer. Selected artists will be featured on the main page.</p>
+          <div style="margin-top:10px;">
+            <a class="btn" href="#contact">Submit Work</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right column: gallery -->
+      <main>
+        <div class="panel" id="gallery">
+          <div class="gallery-header">
+            <h2>Latest Works</h2>
+            <div class="filters">
+              <button class="filter" aria-pressed="true">All</button>
+              <button class="filter">Sketches</button>
+              <button class="filter">Tattoos</button>
+            </div>
+          </div>
+
+          <div class="gallery-grid">
+
+            <!-- Card 1 -->
+            <figure class="card">
+              <a href="#img1">
+                <img src="https://blcktony.github.io/Tatto/IMG/Caradragon.png" alt="Dragon artwork by El Rincon del Radiologo">
+              </a>
+              <figcaption>
+                <span class="tag">Anime / Canvas</span>
+                <span style="opacity:.9">27/04/24</span>
+              </figcaption>
+            </figure>
+
+            <!-- Card 2 -->
+            <figure class="card">
+              <a href="#img2"><img src="https://blcktony.github.io/Tatto/IMG/Chica.png" alt="Woman portrait artwork"></a>
+              <figcaption>
+                <span class="tag">Portrait</span>
+                <span style="opacity:.9">Study</span>
+              </figcaption>
+            </figure>
+
+            <!-- Card 3 -->
+            <figure class="card">
+              <a href="#img3"><img src="https://blcktony.github.io/Tatto/IMG/Onepiece.png" alt="One Piece inspired artwork"></a>
+              <figcaption>
+                <span class="tag">Fan Art</span>
+                <span style="opacity:.9">Ink</span>
+              </figcaption>
+            </figure>
+
+            <!-- Card 4 (logo/banner) -->
+            <figure class="card">
+              <a href="#img4"><img src="https://blcktony.github.io/Tatto/IMG/El-rincon-del-Radiologo-23-3-2025.png" alt="El Rincón del Radiologo banner"></a>
+              <figcaption>
+                <span class="tag">Brand</span>
+                <span style="opacity:.9">Logo</span>
+              </figcaption>
+            </figure>
+
+            <!-- Add more cards if you want — keep using same /IMG/* files -->
+          </div>
+        </div>
+      </main>
+
+    </div> <!-- /layout -->
+
+    <!-- CSS-only lightboxes -->
+    <div id="img1" class="lightbox" aria-hidden="true">
+      <div class="content" role="dialog" aria-modal="true">
+        <img src="https://blcktony.github.io/Tatto/IMG/Caradragon.png" alt="">
+        <div class="meta">
+          <h4>Dragon piece</h4>
+          <p>Mixed media inspired by anime — works well as a tattoo reference. Contact via Instagram to commission.</p>
+          <a class="close" href="#gallery">Close</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="img2" class="lightbox" aria-hidden="true">
+      <div class="content" role="dialog" aria-modal="true">
+        <img src="https://blcktony.github.io/Tatto/IMG/Chica.png" alt="">
+        <div class="meta">
+          <h4>Woman portrait</h4>
+          <p>Color study on canvas. Artist: El Rincón. Available as printed art or tattoo reference.</p>
+          <a class="close" href="#gallery">Close</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="img3" class="lightbox" aria-hidden="true">
+      <div class="content" role="dialog" aria-modal="true">
+        <img src="https://blcktony.github.io/Tatto/IMG/Onepiece.png" alt="">
+        <div class="meta">
+          <h4>One Piece — fan ink</h4>
+          <p>Ink wash piece. Great for black & gray tattoo references.</p>
+          <a class="close" href="#gallery">Close</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="img4" class="lightbox" aria-hidden="true">
+      <div class="content" role="dialog" aria-modal="true">
+        <img src="https://blcktony.github.io/Tatto/IMG/El-rincon-del-Radiologo-23-3-2025.png" alt="">
+        <div class="meta">
+          <h4>Banner / Logo</h4>
+          <p>Site brand mark. Keep for headers or merch.</p>
+          <a class="close" href="#gallery">Close</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact / Footer -->
+    <footer id="contact">
+      <div>Contact: <a href="mailto:el.radiologo@example.com" style="color:var(--accent); text-decoration:none">el.radiologo@example.com</a> • IG: <a href="https://www.instagram.com/tatoo206" style="color:var(--accent); text-decoration:none">@tatoo206</a></div>
+      <div style="opacity:.8">Selected works displayed with respect for original creators. Want your work featured? Email a few high-res images and a short bio.</div>
+    </footer>
+
+  </div>
+</body>
+</html>
